@@ -5,7 +5,7 @@ terraform {
     hostname = "app.terraform.io"
 
     workspaces {
-      name = "TFC-Senacor"
+      name = "gcp-infrastructure"
     }
   }
 
