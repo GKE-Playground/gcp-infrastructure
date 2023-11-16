@@ -16,7 +16,7 @@ variable "gke_num_nodes" {
 # GKE cluster
 data "google_container_engine_versions" "gke_version" {
   provider       = google-beta
-  location       = var.region
+  location       = var.zone
   version_prefix = "1.27."
   project        = var.project_id
 }
@@ -24,7 +24,7 @@ data "google_container_engine_versions" "gke_version" {
 resource "google_container_cluster" "primary" {
   project  = var.project_id
   name     = "tung-test-gke"
-  location = var.region
+  location = var.zone
 
   # We can't create a cluster with no node pool defined, but we want to only use
   # separately managed node pools. So we create the smallest possible default
@@ -40,7 +40,7 @@ resource "google_container_cluster" "primary" {
 resource "google_container_node_pool" "primary_nodes" {
   project  = var.project_id
   name     = google_container_cluster.primary.name
-  location = var.region
+  location = var.zone
   cluster  = google_container_cluster.primary.name
 
   version    = data.google_container_engine_versions.gke_version.release_channel_latest_version["STABLE"]
