@@ -16,15 +16,15 @@ variable "gke_num_nodes" {
 # GKE cluster
 data "google_container_engine_versions" "gke_version" {
   provider       = google-beta
-  location       = var.zone
+  location       = var.region
   version_prefix = "1.27."
   project        = var.project_id
 }
 
 resource "google_container_cluster" "primary" {
   project  = var.project_id
-  name     = "${var.project_id}-gke"
-  location = var.zone
+  name     = "tung-test-gke"
+  location = var.region
 
   # We can't create a cluster with no node pool defined, but we want to only use
   # separately managed node pools. So we create the smallest possible default
@@ -40,7 +40,7 @@ resource "google_container_cluster" "primary" {
 resource "google_container_node_pool" "primary_nodes" {
   project  = var.project_id
   name     = google_container_cluster.primary.name
-  location = var.zone
+  location = var.region
   cluster  = google_container_cluster.primary.name
 
   version    = data.google_container_engine_versions.gke_version.release_channel_latest_version["STABLE"]
@@ -58,7 +58,7 @@ resource "google_container_node_pool" "primary_nodes" {
 
     # preemptible  = true
     machine_type = "n1-standard-1"
-    tags         = ["gke-node", "${var.project_id}-gke"]
+    tags         = ["gke-node", "tung-test-gke"]
     metadata = {
       disable-legacy-endpoints = "true"
     }
