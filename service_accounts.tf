@@ -26,3 +26,9 @@ resource "google_project_iam_member" "wif_user" {
   role    = "roles/iam.workloadIdentityUser"
   member  = "serviceAccount:${google_service_account.service_account.email}"
 }
+
+resource "google_project_iam_member" "cloud_sql_admin" {
+  project = var.project_id
+  role    = "roles/cloudsql.admin"
+  member  = "serviceAccount:${google_service_account.service_account.email}"
+}
