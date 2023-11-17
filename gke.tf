@@ -3,11 +3,13 @@ variable "gke_username" {
   description = "gke username"
 }
 
+// tf cloud
 variable "gke_password" {
   default     = ""
   description = "gke password"
 }
 
+// no default
 variable "gke_num_nodes" {
   default     = 2
   description = "number of gke nodes"
