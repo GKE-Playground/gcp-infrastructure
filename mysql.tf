@@ -1,5 +1,5 @@
 resource "google_sql_database_instance" "sql_instance" {
-  name             = "tung-sql-instance-psa"
+  name             = "tung-sql-instance"
   region           = var.region
   database_version = "MYSQL_8_0"
 
