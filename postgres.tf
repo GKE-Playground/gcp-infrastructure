@@ -1,5 +1,5 @@
-resource "google_sql_database_instance" "sql_instance" {
-  name             = "tung-sql-instance"
+resource "google_sql_database_instance" "postgres_sql_instance" {
+  name             = "tung-postgres-sql-instance"
   region           = var.region
   database_version = "POSTGRES_12"
 
