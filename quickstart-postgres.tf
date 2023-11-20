@@ -9,7 +9,7 @@ resource "google_sql_database_instance" "quickstart_postgres_sql_instance" {
   deletion_protection = false
 }
 
-resource "google_sql_user" "users" {
+resource "google_sql_user" "quickstart_users" {
   name     = "quickstart-db-user"
   instance = google_sql_database_instance.quickstart_postgres_sql_instance_postgres_sql_instance.name
   password = "tung123"
