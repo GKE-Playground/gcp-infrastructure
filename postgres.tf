@@ -10,8 +10,7 @@ resource "google_sql_database_instance" "postgres_sql_instance" {
 }
 
 resource "google_sql_user" "users" {
-  name     = "me"
+  name     = "tung-user"
   instance = google_sql_database_instance.postgres_sql_instance.name
-  host     = "me.com"
   password = "tung123"
 }
