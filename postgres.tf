@@ -9,7 +9,7 @@ resource "google_sql_database_instance" "postgres_sql_instance" {
   deletion_protection = false
 
   provisioner "local-exec" {
-    command = "PGPASSWORD=tung123 psql -h ${google_sql_database_instance.default.ip_address} -p 5432 -U tung-user -d tung-database -f schema.sql"
+    command = "PGPASSWORD=tung123 psql -f schema.sql -p 5432 -U tung-user -d tung-database -f schema.sql"
   }
 }
 
