@@ -7,6 +7,10 @@ resource "google_sql_database_instance" "postgres_sql_instance" {
     tier = "db-custom-2-7680"
   }
   deletion_protection = false
+
+  provisioner "local-exec" {
+    command = "PGPASSWORD=tung123 psql -h ${google_sql_database_instance.default.ip_address} -p 5432 -U tung-user -d tung-database -f schema.sql"
+  }
 }
 
 resource "google_sql_user" "users" {
@@ -18,18 +22,4 @@ resource "google_sql_user" "users" {
 resource "google_sql_database" "postgres_sql_database" {
   name     = "tung-database"
   instance = google_sql_database_instance.postgres_sql_instance.name
-}
-
-resource "null_resource" "create_table" {
-  depends_on = [google_sql_database.postgres_sql_database]
-
-  provisioner "local-exec" {
-    command = <<EOT
-      gcloud sql databases execute \
-      --project=${var.project_id} \
-      --instance=${google_sql_database_instance.postgres_sql_instance.name} \
-      --database=${google_sql_database.postgres_sql_database.name} \
-      --sql='CREATE TABLE IF NOT EXISTS your_table_name (id SERIAL PRIMARY KEY, name VARCHAR(255), age INT);'
-    EOT
-  }
 }
