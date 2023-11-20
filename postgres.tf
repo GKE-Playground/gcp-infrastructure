@@ -14,3 +14,8 @@ resource "google_sql_user" "users" {
   instance = google_sql_database_instance.postgres_sql_instance.name
   password = "tung123"
 }
+
+resource "google_sql_database" "postgres_sql_database" {
+  name     = "tung-database"
+  instance = google_sql_database_instance.postgres_sql_instance.name
+}
