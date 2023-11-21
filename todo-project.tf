@@ -62,9 +62,7 @@ resource "google_sql_database" "todo_database" {
 
 resource "kubernetes_namespace" "todo_namespace" {
   metadata {
-    annotations = {
-      name = "todo-namespace"
-    }
+    name = "todo-namespace"
   }
 }
 
