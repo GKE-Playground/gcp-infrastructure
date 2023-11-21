@@ -81,3 +81,17 @@ module "my-app-workload-identity" {
   project_id          = var.project_id
   roles               = ["roles/storage.admin", "roles/compute.admin","roles/cloudsql.client"]
 }
+
+resource "kubernetes_secret" "db_secret" {
+  metadata {
+    name = "tung-db-secret"
+  }
+
+  data = {
+    username = base64encode("tung-user")
+    password = base64encode("tung123")
+    database = base64encode("todo-database")
+  }
+
+  type = "Opaque"  # You can adjust the secret type based on your use case
+}
