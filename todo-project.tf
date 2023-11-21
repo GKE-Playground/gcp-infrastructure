@@ -85,6 +85,7 @@ module "my-app-workload-identity" {
 resource "kubernetes_secret" "db_secret" {
   metadata {
     name = "tung-db-secret"
+    namespace = kubernetes_namespace.todo_namespace.metadata[0].name
   }
 
   data = {
