@@ -36,3 +36,25 @@ resource "google_project_iam_member" "todo_sql_client_role" {
   role    = "roles/cloudsql.client"
   member  = "serviceAccount:${google_service_account.todo_gsa.email}"
 }
+
+resource "google_sql_database_instance" "todo_sql_public_instance" {
+  name             = "todo-sql-public-instance"
+  region           = var.region
+  database_version = "POSTGRES_12"
+
+  settings {
+    tier = "db-custom-2-7680"
+  }
+  deletion_protection = false
+}
+
+resource "google_sql_user" "users" {
+  name     = "tung-user"
+  instance = google_sql_database_instance.todo_sql_public_instance.name
+  password = "tung123"
+}
+
+resource "google_sql_database" "postgres_sql_database" {
+  name     = "todo-database"
+  instance = google_sql_database_instance.todo_sql_public_instance.name
+}
