@@ -69,6 +69,8 @@ resource "kubernetes_namespace" "todo_namespace" {
 resource "kubernetes_service_account" "todo_ksa" {
   metadata {
     name = "todo-gsa"
+
+    namespace = kubernetes_namespace.todo_namespace.metadata[0].name
   }
 }
 
