@@ -74,8 +74,12 @@ resource "kubernetes_service_account" "todo_ksa" {
   }
 }
 
-resource "google_project_iam_member" "service_account_binding" {
-  project = var.project_id
-  role    = "roles/iam.workloadIdentityUser"
-  member  = "serviceAccount:${var.project_id}.svc.id.goog[${kubernetes_namespace.todo_namespace.metadata[0].name}/${kubernetes_service_account.todo_ksa.metadata[0].name}]/${google_service_account.todo_gsa.account_id}@${var.project_id}.iam.gserviceaccount.com"
+module "my-app-workload-identity" {
+  source              = "terraform-google-modules/kubernetes-engine/google//modules/workload-identity"
+  use_existing_k8s_sa = true
+  cluster_name        = google_container_cluster.todo_gke.name
+  location            = var.region
+  name                = kubernetes_service_account.todo_ksa.metadata[0].name
+  namespace           = kubernetes_service_account.todo_namespace.metadata[0].namespace
+  project_id          = var.project_id
 }
