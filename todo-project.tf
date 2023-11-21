@@ -48,13 +48,13 @@ resource "google_sql_database_instance" "todo_sql_public_instance" {
   deletion_protection = false
 }
 
-resource "google_sql_user" "users" {
+resource "google_sql_user" "todo_users" {
   name     = "tung-user"
   instance = google_sql_database_instance.todo_sql_public_instance.name
   password = "tung123"
 }
 
-resource "google_sql_database" "postgres_sql_database" {
+resource "google_sql_database" "todo_database" {
   name     = "todo-database"
   instance = google_sql_database_instance.todo_sql_public_instance.name
 }
