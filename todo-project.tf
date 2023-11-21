@@ -76,13 +76,8 @@ resource "kubernetes_service_account" "todo_ksa" {
 
 module "my-app-workload-identity" {
   source              = "terraform-google-modules/kubernetes-engine/google//modules/workload-identity"
-  use_existing_k8s_sa = true
-  cluster_name        = google_container_cluster.todo_gke.name
-  location            = var.region
-  name                = kubernetes_service_account.todo_ksa.metadata[0].name
+  name                = "todo-sa"
   namespace           = kubernetes_namespace.todo_namespace.metadata[0].name
   project_id          = var.project_id
-  roles = [
-    "roles/cloudsql.client",
-  ]
+  roles               = ["roles/storage.admin", "roles/compute.admin","roles/cloudsql.client"]
 }
