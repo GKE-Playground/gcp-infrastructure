@@ -1,4 +1,4 @@
-resource "google_container_cluster" "primary" {
+resource "google_container_cluster" "todo_gke" {
   name     = "todo-gke"
   location = var.region
  
