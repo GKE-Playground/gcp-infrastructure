@@ -7,10 +7,6 @@ resource "google_sql_database_instance" "postgres_sql_instance" {
     tier = "db-custom-2-7680"
   }
   deletion_protection = false
-
-  provisioner "local-exec" {
-    command = "PGPASSWORD=tung123 psql -f schema.sql -p 5432 -U tung-user -d tung-database -f schema.sql"
-  }
 }
 
 resource "google_sql_user" "users" {
