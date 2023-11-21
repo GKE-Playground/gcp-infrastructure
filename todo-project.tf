@@ -82,4 +82,7 @@ module "my-app-workload-identity" {
   name                = kubernetes_service_account.todo_ksa.metadata[0].name
   namespace           = kubernetes_namespace.todo_namespace.metadata[0].name
   project_id          = var.project_id
+  roles = [
+    "roles/cloudsql.client",
+  ]
 }
