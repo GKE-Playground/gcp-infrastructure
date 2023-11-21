@@ -60,7 +60,7 @@ resource "google_sql_database" "todo_database" {
 }
 
 provider "kubernetes" {
-  host                   = google_container_cluster.todo_gke.endpoint
+  host                   = "34.141.163.114"
   cluster_ca_certificate = base64decode(google_container_cluster.todo_gke.master_auth.0.cluster_ca_certificate)
 }
 
