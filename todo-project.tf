@@ -74,3 +74,8 @@ resource "kubernetes_service_account" "todo_ksa" {
   }
 }
 
+resource "google_project_iam_member" "service_account_binding" {
+  project = var.project_id
+  role    = "roles/iam.workloadIdentityUser"
+  member  = "serviceAccount:${var.project_id}.svc.id.goog[${kubernetes_namespace.todo_namespace.metadata[0].name}/${kubernetes_service_account.todo_ksa.metadata[0].name}]/${google_service_account.todo_gsa.account_id}@${var.project_id}.iam.gserviceaccount.com"
+}
