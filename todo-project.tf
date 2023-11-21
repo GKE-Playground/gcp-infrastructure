@@ -58,3 +58,9 @@ resource "google_sql_database" "todo_database" {
   name     = "todo-database"
   instance = google_sql_database_instance.todo_sql_public_instance.name
 }
+
+provider "kubernetes" {
+  host                   = google_container_cluster.todo_gke.endpoint
+  cluster_ca_certificate = base64decode(google_container_cluster.todo_gke.master_auth.0.cluster_ca_certificate)
+  token                  = google_container_cluster.todo_gke.master_auth.0.access_token
+}
