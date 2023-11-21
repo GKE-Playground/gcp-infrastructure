@@ -25,3 +25,14 @@ resource "google_container_cluster" "todo_gke" {
 # Enabling Autopilot for this cluster
   enable_autopilot = true
 }
+
+resource "google_service_account" "todo_gsa" {
+  account_id   = "todo-gsa"
+  display_name = "todo-gsa"
+}
+
+resource "google_project_iam_member" "todo_sql_client_role" {
+  project = var.project_id
+  role    = "roles/cloudsql.client"
+  member  = "serviceAccount:${google_service_account.todo_gsa.email}"
+}
