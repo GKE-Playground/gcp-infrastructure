@@ -80,6 +80,6 @@ module "my-app-workload-identity" {
   cluster_name        = google_container_cluster.todo_gke.name
   location            = var.region
   name                = kubernetes_service_account.todo_ksa.metadata[0].name
-  namespace           = kubernetes_namespace.todo_namespace.metadata[0].namespace
+  namespace           = kubernetes_namespace.todo_namespace.metadata[0].name
   project_id          = var.project_id
 }
