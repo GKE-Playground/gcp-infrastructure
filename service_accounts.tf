@@ -22,24 +22,10 @@ resource "google_project_iam_member" "iam_members" {
   member  = "serviceAccount:${google_service_account.service_account.email}"
 }
 
-resource "google_service_account" "todo_gsa" {
-  account_id   = "todo-gsa"
-  display_name = "todo-gsa"
-}
-
 resource "google_project_iam_member" "todo_sql_client_role" {
   project = var.project_id
   role    = "roles/cloudsql.client"
   member  = "serviceAccount:${google_service_account.todo_gsa.email}"
-}
-
-
-resource "kubernetes_service_account" "todo_ksa" {
-  metadata {
-    name = "todo-ksa"
-
-    namespace = kubernetes_namespace.todo_namespace.metadata[0].name
-  }
 }
 
 module "my-app-workload-identity" {
