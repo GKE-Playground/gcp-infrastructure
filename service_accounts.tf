@@ -26,5 +26,5 @@ resource "google_service_account_iam_binding" "sa_iam_binding_wif" {
   service_account_id = google_service_account.service_account.name
   role               = "roles/iam.workloadIdentityUser"
   members = [
-  "principal://iam.googleapis.com/projects/507085571061/locations/global/workloadIdentityPools/terraform-pool-todo/repository/GKE-Playground/GET-ms"]
+  "principal://iam.googleapis.com/projects/507085571061/locations/global/workloadIdentityPools/terraform-pool-todo/attribute.repository/GKE-Playground/GET-ms"]
 }
