@@ -1,4 +1,3 @@
-
 resource "google_sql_database_instance" "todo_sql_public_instance" {
   name             = "todo-sql-public-instance"
   region           = var.region

@@ -24,7 +24,7 @@ resource "kubernetes_secret" "db_secret" {
 
   data = {
     username = base64encode("tung-user")
-    password = base64encode("tung123")
+    password = base64encode(var.postgres_tung_user_password)
     database = base64encode("todo-database")
   }
 
