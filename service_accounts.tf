@@ -29,5 +29,5 @@ resource "google_service_account_iam_binding" "sa_iam_binding_wif" {
   "principalSet://iam.googleapis.com/projects/507085571061/locations/global/workloadIdentityPools/terraform-pool-todo/attribute.repository/GKE-Playground/GET-ms",
   "principalSet://iam.googleapis.com/projects/507085571061/locations/global/workloadIdentityPools/terraform-pool-todo/attribute.repository/GKE-Playground/POST-ms",
   "principalSet://iam.googleapis.com/projects/507085571061/locations/global/workloadIdentityPools/terraform-pool-todo/attribute.repository/GKE-Playground/PUT-ms",
-  "principalSet://iam.googleapis.com/projects/507085571061/locations/global/workloadIdentityPools/terraform-pool-todo/attribute.repository/GKE-Playground/FE-ms"]
+  "principalSet://iam.googleapis.com/projects/507085571061/locations/global/workloadIdentityPools/terraform-pool-todo/attribute.repository/GKE-Playground/todo-FE"]
 }
