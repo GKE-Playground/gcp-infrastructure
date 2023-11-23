@@ -40,7 +40,7 @@ resource "google_iam_workload_identity_pool_provider" "github_provider" {
   }
 
   oidc {
-    issuer_uri = "https://app.terraform.io"
+    issuer_uri = "https://token.actions.githubusercontent.com"
   }
 
 }
