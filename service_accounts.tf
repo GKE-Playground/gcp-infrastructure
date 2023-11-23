@@ -23,9 +23,9 @@ resource "google_project_iam_member" "iam_members" {
 }
 
 resource "google_service_account_iam_binding" "sa_iam_binding_wif" {
-  service_account_id = google_service_account.service_account.account_id
+  service_account_id = "${google_service_account.service_account.account_id}@${var.project_id}.iam.gserviceaccount.com"
   role               = "roles/iam.workloadIdentityUser"
   members = [
-    "principal://iam.googleapis.com/projects/507085571061/locations/global/workloadIdentityPools/terraform-pool-todo/providers/github-provider-todo",
+    "principal://iam.googleapis.com/projects/${PROJECT_NUMBER}/locations/global/workloadIdentityPools/terraform-pool-todo/providers/github-provider-todo",
   ]
 }
