@@ -22,12 +22,6 @@ resource "google_project_iam_member" "iam_members" {
   member  = "serviceAccount:${google_service_account.service_account.email}"
 }
 
-resource "google_project_iam_member" "todo_sql_client_role" {
-  project = var.project_id
-  role    = "roles/cloudsql.client"
-  member  = "serviceAccount:${google_service_account.todo_gsa.email}"
-}
-
 module "my-app-workload-identity" {
   source              = "terraform-google-modules/kubernetes-engine/google//modules/workload-identity"
   name                = "todo-sa"
