@@ -32,3 +32,15 @@ resource "google_project_iam_member" "cloud_sql_admin" {
   role    = "roles/cloudsql.admin"
   member  = "serviceAccount:${google_service_account.service_account.email}"
 }
+
+
+resource "google_service_account" "todo_gsa" {
+  account_id   = "todo-gsa"
+  display_name = "todo-gsa"
+}
+
+resource "google_project_iam_member" "todo_sql_client_role" {
+  project = var.project_id
+  role    = "roles/cloudsql.client"
+  member  = "serviceAccount:${google_service_account.todo_gsa.email}"
+}
