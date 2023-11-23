@@ -13,7 +13,7 @@ resource "google_sql_database_instance" "todo_sql_public_instance" {
 resource "google_sql_user" "todo_users" {
   name     = "tung-user"
   instance = google_sql_database_instance.todo_sql_public_instance.name
-  password = "tung123"
+  password = var.postgres_tung_user_password
 }
 
 resource "google_sql_database" "todo_database" {

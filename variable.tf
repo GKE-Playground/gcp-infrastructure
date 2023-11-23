@@ -21,3 +21,8 @@ variable "region" {
 variable "zone" {
   type = string
 }
+
+variable "postgres_tung_user_password" {
+  type = string
+}
+  
