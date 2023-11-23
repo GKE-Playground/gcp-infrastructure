@@ -3,36 +3,24 @@ resource "google_service_account" "service_account" {
   display_name = "github-actions-tung"
 }
 
-resource "google_project_iam_member" "gcr_writer" {
-  project = var.project_id
-  role    = "roles/artifactregistry.writer"
-  member  = "serviceAccount:${google_service_account.service_account.email}"
+variable "iam_roles" {
+  type = map(string)
+  default = {
+    gcr_writer      = "roles/artifactregistry.writer",
+    gke_admin       = "roles/container.admin",
+    storage_admin   = "roles/storage.admin",
+    wif_user        = "roles/iam.workloadIdentityUser",
+    cloud_sql_admin = "roles/cloudsql.admin",
+  }
 }
 
-resource "google_project_iam_member" "gke_admin" {
+resource "google_project_iam_member" "iam_members" {
+  for_each = var.iam_roles
+
   project = var.project_id
-  role    = "roles/container.admin"
+  role    = each.value
   member  = "serviceAccount:${google_service_account.service_account.email}"
 }
-
-resource "google_project_iam_member" "storage_admin" {
-  project = var.project_id
-  role    = "roles/storage.admin"
-  member  = "serviceAccount:${google_service_account.service_account.email}"
-}
-
-resource "google_project_iam_member" "wif_user" {
-  project = var.project_id
-  role    = "roles/iam.workloadIdentityUser"
-  member  = "serviceAccount:${google_service_account.service_account.email}"
-}
-
-resource "google_project_iam_member" "cloud_sql_admin" {
-  project = var.project_id
-  role    = "roles/cloudsql.admin"
-  member  = "serviceAccount:${google_service_account.service_account.email}"
-}
-
 
 resource "google_service_account" "todo_gsa" {
   account_id   = "todo-gsa"
