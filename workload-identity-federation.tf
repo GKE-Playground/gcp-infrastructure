@@ -5,8 +5,9 @@ resource "google_iam_workload_identity_pool" "todo_tfc_identity_pool" {
   disabled                  = false
 }
 
+
 resource "google_iam_workload_identity_pool_provider" "tfc_pool_provider" {
-  workload_identity_pool_id          = google_iam_workload_identity_pool.tfc_identity_pool.workload_identity_pool_id
+  workload_identity_pool_id          = google_iam_workload_identity_pool.todo_tfc_identity_pool.workload_identity_pool_id
   workload_identity_pool_provider_id = "terraform-provider-todo"
   display_name                       = "terraform-provider-todo"
   description                        = "Terraform Cloud OIDC Provider"
@@ -28,7 +29,7 @@ resource "google_iam_workload_identity_pool_provider" "tfc_pool_provider" {
 }
 
 resource "google_iam_workload_identity_pool_provider" "github_provider" {
-  workload_identity_pool_id          = google_iam_workload_identity_pool.tfc_identity_pool.workload_identity_pool_id
+  workload_identity_pool_id          = google_iam_workload_identity_pool.todo_tfc_identity_pool.workload_identity_pool_id
   workload_identity_pool_provider_id = "github-provider-todo"
   display_name                       = "github-provider-todo"
   description                        = "github Cloud OIDC Provider"
